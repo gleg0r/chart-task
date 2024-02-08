@@ -1,0 +1,32 @@
+//colors
+$grayColor: #ADADAD;
+$activeCircle: #FF7A00;
+$disabledCircle: #FFD4AD;
+$textMain: #3A3A3A;
+$activeJobCircle: #00A372;
+
+//mixins
+@mixin fontStyle($size) {
+    font-family: ALS Hauss;
+    font-size: $size;
+    font-weight: 700;
+    line-height: 13px;
+}
+
+@mixin circleStyle($color) {
+    width: 27px;
+    height: 27px;
+    background: $color;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+@mixin textStyle($color, $top) {
+    position: absolute;
+    top: $top;
+    left: -4px;
+    color: $color;
+    @include fontStyle(10px);
+    text-align: center;
+    padding: 3.75px 8.17px 2.25px 8.83px;
+}

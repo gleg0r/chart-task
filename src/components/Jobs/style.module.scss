@@ -1,0 +1,97 @@
+@import '../../styles/font.scss';
+@import '../../styles/variables.scss';
+
+.jobs {
+  position: relative;
+  width: 256px;
+  height: 256px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100%);
+    height: calc(100%);
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 3px solid $grayColor;
+  }
+  &__circles {
+    position: absolute;
+    z-index: 1;
+    top: -12px;
+    left: calc(50%);
+    height: 50%;
+    transform-origin: 7% 110%;
+    @for $i from 2 through 10 {
+      $plusDeg: -36deg + (36)*$i;
+      $minusDeg: 36deg + (-36deg)*$i;
+      &:nth-child(#{$i}) {
+        transform: rotate($plusDeg);
+        & .jobs__text {
+          transform: rotate($minusDeg);
+          @if $i == 8 {
+            top: -65px
+          }
+        }
+        & .jobs__textActive {
+          transform: rotate($minusDeg);
+          @if $i == 8 {
+            top: -65px
+          }
+        }
+      }
+    }
+  }
+
+  &__item {
+    @include circleStyle($grayColor);
+    transition: .3s;
+  }
+  &__itemActive {
+    @include circleStyle($activeJobCircle);
+    transition: .3s;
+  }
+  &_border {
+    display: none;
+  }
+  @keyframes animate {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  &__borderActive {
+    position: absolute;
+    @include circleStyle(#fff);
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: 1px solid $activeJobCircle;
+    top: -3px;
+    left: -3px;
+    z-index: -1;
+    animation-name: animate;
+    animation-duration: .3s;
+  }
+  &__text {
+    @include textStyle($grayColor, -60px);
+    transition: .3s;
+  }
+  &__textActive {
+    @include textStyle($textMain, -60px);
+    transition: .3s;
+    box-sizing: border-box;
+    border: 1px solid rgb(244, 244, 244);
+    border-radius: 6px;
+    backdrop-filter: blur(2px);
+    background: rgba(255, 255, 255, 0.5);
+  }
+}

@@ -1,0 +1,96 @@
+@import '../../styles/variables.scss';
+@import '../../styles/font.scss';
+
+.skills {
+  position: relative;
+  width: 533px;
+  height: 533px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100%);
+    height: calc(100%);
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 3px solid $grayColor;
+  }
+  &__circles {
+    
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    left: calc(50%);
+    height: 50%;
+    transform-origin: 7% 104%;
+    @for $i from 2 through 29 {
+      $plusDeg: -12.85deg + (12.85deg)*$i;
+      $minusDeg: 12.85deg + (-12.85deg)*$i;
+      &:nth-child(#{$i}) {
+        transform: rotate($plusDeg);
+        & .skills__text {
+          transform: rotate($minusDeg);
+          @if $i>5 {
+            left: -10px;
+            top: -45px;
+          }
+          @if $i == 5 {
+            top: -52px;
+            left: 0px;
+          }
+
+          @if $i > 7 and $i < 9 {
+            top: -78px;
+            left: -51px;
+          }
+          @if $i>15 {
+            left: -17px;
+          }
+        }
+        & .skills__textActive {
+          transform: rotate($minusDeg);
+          @if $i>5 {
+            left: -10px;
+            top: -45px;
+          }
+          @if $i == 5 {
+            top: -52px;
+            left: 0px;
+          }
+
+          @if $i == 8{
+            top: -68px;
+            left: -36px;
+          }
+          @if $i>15 {
+            left: -17px;
+          }
+        }
+      }
+    }
+  }
+  &__item {
+    @include circleStyle($disabledCircle);
+  }
+  &__itemActive {
+    @include circleStyle($activeCircle);
+  }
+  &__text {
+    @include textStyle($grayColor, -35px);
+    transition: .3s;
+  }
+  &__textActive {
+    @include textStyle($textMain, -35px);
+    transition: .3s;
+  }
+  &__jobs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
