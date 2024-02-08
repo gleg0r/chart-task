@@ -28,6 +28,7 @@
     left: calc(50%);
     height: 50%;
     transform-origin: 7% 104%;
+
     @for $i from 2 through 29 {
       $plusDeg: -12.85deg + (12.85deg)*$i;
       $minusDeg: 12.85deg + (-12.85deg)*$i;
@@ -44,9 +45,9 @@
             left: 0px;
           }
 
-          @if $i > 7 and $i < 9 {
-            top: -78px;
-            left: -51px;
+          @if $i == 8 {
+            top: -60px;
+            left: -36px;
           }
           @if $i>15 {
             left: -17px;
@@ -64,7 +65,7 @@
           }
 
           @if $i == 8{
-            top: -68px;
+            top: -60px;
             left: -36px;
           }
           @if $i>15 {
@@ -76,9 +77,11 @@
   }
   &__item {
     @include circleStyle($disabledCircle);
+    transition: .3s;
   }
   &__itemActive {
     @include circleStyle($activeCircle);
+    transition: .3s;
   }
   &__text {
     @include textStyle($grayColor, -35px);
@@ -87,10 +90,53 @@
   &__textActive {
     @include textStyle($textMain, -35px);
     transition: .3s;
+
   }
   &__jobs {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  @keyframes lines {
+    0% {
+      height: 0%;
+    }
+    100% {
+      height: 100%;
+    }
+  }
+  &__line {
+    position: relative;
+    top: 0;
+    left: 12px;
+    width: 3px;
+    height: 100%;
+    z-index: -1;
+    animation: lines;
+    animation-duration: 1s;
+    &_main{
+        position: absolute;
+        top: -2px;
+        width: 100%;
+        height: 100%;
+        background: $activeCircle;
+        z-index: -1;
+        transform-origin: 7% 0%;
+        height: 50%;
+    }
+    &_others {
+      position: absolute;
+      top: -2px;
+      width: 100%;
+      height: 100%;
+      background: $otherLine;
+      z-index: -1;
+      transform-origin: 7% 0%;
+      height: 50%;
+  }
+  }
+}
+
+.blank {
+  display: none;
 }
