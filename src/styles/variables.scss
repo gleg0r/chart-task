@@ -31,3 +31,17 @@ $otherLine: #8F59B9;
     text-align: center;
     padding: 3.75px 8.17px 2.25px 8.83px;
 }
+
+// animations
+
+@keyframes animate {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }

@@ -56,17 +56,6 @@
   &_border {
     display: none;
   }
-  @keyframes animate {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(.5);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
 
   &__borderActive {
     position: absolute;

@@ -120,7 +120,7 @@
         width: 100%;
         height: 100%;
         background: $activeCircle;
-        z-index: -1;
+        z-index: 0;
         transform-origin: 7% 0%;
         height: 50%;
     }
@@ -133,7 +133,20 @@
       z-index: -1;
       transform-origin: 7% 0%;
       height: 50%;
+    }
   }
+  &__border {
+    position: absolute;
+    @include circleStyle(#fff);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid $activeCircle;
+    top: -4px;
+    left: -4px;
+    z-index: -1;
+    animation-name: animate;
+    animation-duration: .3s;
   }
 }
 

@@ -2,7 +2,6 @@ import arrayMapHelper from './arrayMapHelper';
 import { newSkillsData } from '../../components/skills/Skills';
 
 export default function rotateLines(arr, jobIndex, name) {
-  console.log(arr);
   jobIndex+= '';
   let deg = 0;
   let i = 10;

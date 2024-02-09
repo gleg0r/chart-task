@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { React, useEffect, useState } from 'react';
 import cn from 'classnames';
 import s from './style.module.scss';
@@ -5,12 +6,11 @@ import { skillsData } from '../../core/data/skillsData';
 import { data } from '../../core/data/db';
 import Jobs from '../Jobs/Jobs';
 import rotateLines from '../../core/helpers/rotateLines';
-
+import { BundleCurve } from 'react-svg-curve';
 
 let jobMainSkills = [];
 let jobOtherSkills = [];
 let newJobSkills = [];
-let lineIndexes = [];
 let newSkillJobs = [];
 export let newSkillsData = skillsData;
 
@@ -47,6 +47,7 @@ export default function Skills() {
       setIsJobChoosen(false);
     }, 100);
   }
+
 
   function changeSkillsPlace(number, mainIndex, otherIndex, name, index) {
     newJobSkills = [];
@@ -104,32 +105,53 @@ export default function Skills() {
     jobMainSkills = [];
     jobOtherSkills = [];
     newSkillJobs = [];
+    
     data.map((item, i) => {
       if(item.mainSkills.includes(newSkillsData[index])) {
         jobMainSkills.push(i);
       }
       if(item.otherSkills.includes(newSkillsData[index])) {
+       
         jobOtherSkills.push(i);
       }
     });
     newSkillJobs = jobMainSkills.concat(jobOtherSkills);
-    newSkillJobs = [...new Set(newJobSkills)];
-    newJobSkills.sort();
+    
   }
   
   useEffect(() => {
     
-  }, [isJobChoosen, jobMainSkills]);
+  }, [isJobChoosen, jobMainSkills, ]);
 
   return(
     <div className={s.skills}>
       {
         newSkillsData.map((item, index) => {
           return <ul key={index} className={s.skills__circles}>
-            <li onClick={() => handleClick(index)} className={cn(newJobSkills.includes(index) || skillIndex === index ? lineIndexes.push(newJobSkills.indexOf(index)) && s.skills__itemActive : s.skills__item)}></li>
-            <li className={cn(skillIndex === index || newJobSkills.includes(index)? s.skills__textActive : s.skills__text)}>{item}</li>
+            <li
+              onClick={() => handleClick(index)}
+              className={
+                cn(
+                  newJobSkills.includes(index) || skillIndex === index
+                    ? s.skills__itemActive
+                    : s.skills__item
+                )
+              }></li>
+            <li className={cn(skillIndex === index ? s.skills__border : s.blank)}></li>
+            <li className={
+              cn(
+                skillIndex === index || newJobSkills.includes(index)
+                  ? s.skills__textActive
+                  : s.skills__text
+              )}>
+              {item}
+            </li>
             <div className={cn(newJobSkills.includes(index) ? s.skills__line : s.blank)}>
-              <hr id='line' className={cn(jobMainSkills.includes(index) ? s.skills__line_main : s.skills__line_others)} />
+              {jobMainSkills.lemgth !== 0 &&
+                jobMainSkills.includes(index) 
+                ? <hr id='line' className={s.skills__line_main} />
+                : <hr id='line' className={s.skills__line_others} />
+              } 
             </div>
           </ul>;
 
@@ -137,7 +159,12 @@ export default function Skills() {
       }
 
       <div className={s.skills__jobs}>
-        <Jobs jobs={newSkillJobs} get={getJobIndex} clickedSkill={clickedSkill}/>
+        <Jobs 
+          jobs={newSkillJobs}
+          get={getJobIndex}
+          clickedSkill={clickedSkill}
+          skillIndex={skillIndex}
+        />
       </div>
     </div>
   );

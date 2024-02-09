@@ -40,6 +40,7 @@
     "classnames": "^2.5.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
+    "react-svg-curve": "^0.2.1",
     "sass": "^1.70.0"
   }
 }
