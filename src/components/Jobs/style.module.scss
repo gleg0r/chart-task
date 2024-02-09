@@ -24,6 +24,7 @@
     left: calc(50%);
     height: 50%;
     transform-origin: 7% 110%;
+    transition: .3s;
     @for $i from 2 through 10 {
       $plusDeg: -36deg + (36)*$i;
       $minusDeg: 36deg + (-36deg)*$i;
